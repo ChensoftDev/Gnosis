@@ -69,9 +69,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if (itemClickListener != null) {
+                        itemClickListener.itemListener(head.getText().toString());
+                    }
                 }
             });
         }
+    }
+
+    // Chul Min: Pass click event to parent activity
+    public interface ItemClickListener {
+        void itemListener(String categoryName);
+    }
+    ItemClickListener itemClickListener;
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.gnosis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,11 +37,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the layout as linear
         // layout for vertical orientation
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         // Sending reference and data to Adapter
         CategoryAdapter adapter = new CategoryAdapter(MainActivity.this, null, categoryName, categoryDesc);
+
+        // Chul MIn : Call list activity when category button clicked
+        adapter.setItemClickListener(new CategoryAdapter.ItemClickListener() {
+            @Override
+            public void itemListener(String categoryName) {
+                Intent intent = new Intent(MainActivity.this, LIstActivity.class);
+                intent.putExtra("categoryName", categoryName);
+                startActivity(intent);
+            }
+        });
 
         // Setting Adapter to RecyclerView
         recyclerView.setAdapter(adapter);
@@ -51,5 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateActivity.class));
             }
         });
+
+
     }
 }
