@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1088044604159",
-    "project_id": "gnosis-b1683",
-    "storage_bucket": "gnosis-b1683.appspot.com"
+    "project_number": "542815796856",
+    "project_id": "gnosis-69135",
+    "storage_bucket": "gnosis-69135.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1088044604159:android:996a98c5b4311f59378aca",
+        "mobilesdk_app_id": "1:542815796856:android:1a4b68352701392944b78d",
         "android_client_info": {
           "package_name": "com.example.gnosis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1088044604159-iagfehv73r75aibn89jfshe84dnc225o.apps.googleusercontent.com",
+          "client_id": "542815796856-ainjppvka8fpsp59gjrrv96auvfnrffc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAbN_wsFxeTDKvvcU1OVyAz8M63KKhISEY"
+          "current_key": "AIzaSyAXJKAtD2C4_ZvDH2j8e_U7WZ3scr5OGLw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1088044604159-iagfehv73r75aibn89jfshe84dnc225o.apps.googleusercontent.com",
+              "client_id": "542815796856-ainjppvka8fpsp59gjrrv96auvfnrffc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

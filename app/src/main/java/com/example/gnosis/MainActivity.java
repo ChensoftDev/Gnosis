@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList categoryDesc = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
             "C-Language", "HTML 5", "CSS"));
     // test comment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
