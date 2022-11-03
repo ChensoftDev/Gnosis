@@ -49,13 +49,13 @@ public class LIstActivity extends AppCompatActivity {
         myCategory = new ArrayList();
         categoryCounter = 0;
 
-        //dummy data start
-        ArrayList todoName = new ArrayList<>(Arrays.asList("All", "Assignment", "To Do", "Mindful", "Timetable",
-                "C-Language", "HTML 5", "CSS"));
-        ArrayList todoStart = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
-                "C-Language", "HTML 5", "CSS"));
-        ArrayList todoCate = new ArrayList<>(Arrays.asList("Todo", "Todo", "C#", "Mindful", "Todo",
-                "Assignment", "Assignment", "Mindful"));
+//        //dummy data start
+//        ArrayList todoName = new ArrayList<>(Arrays.asList("All", "Assignment", "To Do", "Mindful", "Timetable",
+//                "C-Language", "HTML 5", "CSS"));
+//        ArrayList todoStart = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
+//                "C-Language", "HTML 5", "CSS"));
+//        ArrayList todoCate = new ArrayList<>(Arrays.asList("Todo", "Todo", "C#", "Mindful", "Todo",
+//                "Assignment", "Assignment", "Mindful"));
         //dummy data end
 
         loadTodoList();
