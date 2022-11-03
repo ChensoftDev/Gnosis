@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Using ArrayList to store images data
     ArrayList categoryImg = null;
-    ArrayList categoryName = new ArrayList<>(Arrays.asList("All", "Assignment", "To Do", "Mindful", "Timetable",
-            "C-Language", "HTML 5", "CSS"));
+    ArrayList categoryName = new ArrayList<>(Arrays.asList("All"));
     ArrayList categoryDesc = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
             "C-Language", "HTML 5", "CSS"));
     // test comment
@@ -33,13 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton addbtn = findViewById(R.id.fab_create);
 
+        // add categoryname in list
+        for(String category : getResources().getStringArray(R.array.spinner_category)) {
+            categoryName.add(category);
+        }
+
+
+
         // Getting reference of recyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewMain);
 
-        // Setting the layout as linear
-        // layout for vertical orientation
-
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        // Setting the layout as grid (2 cols)
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
 

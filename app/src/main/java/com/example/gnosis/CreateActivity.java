@@ -123,7 +123,7 @@ public class CreateActivity extends AppCompatActivity {
         todo_list_model myTodoItem = new todo_list_model(name, startDate, startTime,
                 EndDate, endTime, description);
 
-        // Write down data in Database         ------------------ does not works
+        // Write down data in Database
         db.collection(category).add(myTodoItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -140,28 +140,6 @@ public class CreateActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                     }
                 });
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("first", "Ada");
-//        user.put("last", "Lovelace");
-//        user.put("born", 1815);
-//
-//        db.collection("users")
-//                .add(user)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Toast.makeText(CreateActivity.this, "Succeed in writing data.",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(CreateActivity.this, "Failed to write data.",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
     }
 
     // Check there is input in 'Name'

@@ -11,20 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gnosis.R;
+import com.example.gnosis.model.todo_list_model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
-    ArrayList todoId, todoHead, todoCate, todoStart;
+    ArrayList myCategory;
     Context context;
+    List<todo_list_model> myTodoList;
 
     // Constructor for initialization
-    public TodoAdapter(Context context, ArrayList todoId, ArrayList todoHead,ArrayList todoCate, ArrayList todoStart ) {
+    public TodoAdapter(Context context, List<todo_list_model> myTodoList, ArrayList myCategory) {
         this.context = context;
-        this.todoId = todoId;
-        this.todoHead = todoHead;
-        this.todoCate = todoCate;
-        this.todoStart = todoStart;
+        this.myTodoList = myTodoList;
+        this.myCategory = myCategory;
+//        this.todoId = todoId;
+//        this.todoHead = todoHead;
+//        this.todoCate = todoCate;
+//        this.todoStart = todoStart;
     }
 
     @NonNull
@@ -39,14 +44,17 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TodoAdapter.ViewHolder holder, int position) {
-        holder.head.setText((String) todoHead.get(position));
-        holder.start.setText((String) todoStart.get(position));
-        holder.category.setText((String) todoCate.get(position));
+        holder.head.setText(myTodoList.get(position).getName());
+        holder.start.setText(myTodoList.get(position).getStartDate() +" "+ myTodoList.get(position).getStartTime());
+        holder.category.setText((String) myCategory.get(position));
+//        holder.head.setText((String) todoHead.get(position));
+//        holder.start.setText((String) todoStart.get(position));
+//        holder.category.setText((String) todoCate.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return todoHead.size();
+        return myTodoList.size();
     }
 
 
