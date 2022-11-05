@@ -19,7 +19,10 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     // Using ArrayList to store images data
-    ArrayList categoryImg = null;
+    //ArrayList categoryImg = null;
+    ArrayList categoryImg = new ArrayList<>(Arrays.asList(R.drawable.checklist, R.drawable.lightbulb,
+            R.drawable.idea, R.drawable.mindful,
+            R.drawable.schedule));
     ArrayList categoryName = new ArrayList<>(Arrays.asList("All"));
     ArrayList categoryDesc = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
             "C-Language", "HTML 5", "CSS"));
@@ -47,12 +50,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         // Sending reference and data to Adapter
-        CategoryAdapter adapter = new CategoryAdapter(MainActivity.this, null, categoryName, categoryDesc);
+        CategoryAdapter adapter = new CategoryAdapter(MainActivity.this, categoryImg, categoryName, categoryDesc);
 
         // Chul MIn : Call list activity when category button clicked
         adapter.setItemClickListener(new CategoryAdapter.ItemClickListener() {
             @Override
             public void itemListener(String categoryName) {
+
+                if(categoryName.equals("Timetable")) {
+                    Intent intent = new Intent(MainActivity.this, TimetableActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+
                 Intent intent = new Intent(MainActivity.this, LIstActivity.class);
                 intent.putExtra("categoryName", categoryName);
                 startActivity(intent);

@@ -44,8 +44,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         // TypeCast Object to int type
-       // int res = (int) categoryImg.get(position);
-        //holder.images.setImageResource(res);
+        int res = (int) categoryImg.get(position);
+        holder.images.setImageResource(res);
         holder.head.setText((String) categoryName.get(position));
         holder.Desc.setText((String) catDesc.get(position));
     }
@@ -62,7 +62,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //images = (ImageView) itemView.findViewById(R.id.imgCat);
+            images = (ImageView) itemView.findViewById(R.id.imgCat);
             head = (TextView) itemView.findViewById(R.id.tvHead);
             Desc = (TextView) itemView.findViewById(R.id.tvDesc);
 

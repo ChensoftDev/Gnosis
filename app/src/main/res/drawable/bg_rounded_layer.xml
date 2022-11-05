@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bg_rounded_bg" />
+    <item
+        android:drawable="@drawable/bg_rounded_top"
+        android:top="120dp" />
+</layer-list>

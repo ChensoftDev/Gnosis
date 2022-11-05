@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_grey">#696969</color>
+    <color name="light_grey">#d1d1d1</color>
+    <color name="task_status_assignment">#CC7A00</color>
+    <color name="task_status_todo">#006ACC</color>
+    <color name="task_status_time_table">#02CB02</color>
+    <color name="task_status_mindful">#EC407A</color>
+    <color name="btn_update">#0098BA</color>
+    <color name="btn_delete">#FD3435</color>
+    <color name="light_blue">#0784FD</color>
+    <color name="timetable_row">#c4e8dd</color>
+    <color name="timetable_row_2">#c5c8e7</color>
+    <color name="time_table_bg">#d9d9d9</color>
 </resources>

@@ -32,6 +32,16 @@ public class RegisterActivity extends AppCompatActivity {
         TextView tvEmail = findViewById(R.id.etRegEmail);
         TextView tvPass = findViewById(R.id.etRegPassword);
 
+        TextView tvSignin = findViewById(R.id.tvSignIn);
+
+        tvSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
