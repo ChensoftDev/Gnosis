@@ -6,7 +6,6 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.gnosis.model.TaskModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
@@ -14,13 +13,17 @@ import com.google.android.material.timepicker.TimeFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class DatetimePicker {
     @RequiresApi(api = Build.VERSION_CODES.O)
     static public void show(FragmentManager fragmentManager, Listener listener) {
         openDateTimePicker(fragmentManager, listener);
     }
+
+    public static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void openDateTimePicker(FragmentManager fragmentManager, Listener listener) {
@@ -50,7 +53,7 @@ public class DatetimePicker {
                     minute
             );
             // format datetime
-            String datetime = dateTime.format(TaskModel.dateTimeFormat);
+            String datetime = dateTime.format(dateTimeFormat);
             listener.onSuccess(datetime);
         });
         materialTimePicker.show(fragmentManager, "Time picker");
