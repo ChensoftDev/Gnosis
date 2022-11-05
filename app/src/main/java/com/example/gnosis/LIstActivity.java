@@ -29,7 +29,7 @@ public class LIstActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     List<todo_list_model> myTodoList;
-    ArrayList myCategory;
+    ArrayList<String> myCategory, myKey;
     int categoryCounter;
 
     @Override
@@ -46,7 +46,8 @@ public class LIstActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         myTodoList = new ArrayList<>();
-        myCategory = new ArrayList();
+        myCategory = new ArrayList<>();
+        myKey = new ArrayList<>();
         categoryCounter = 0;
 
 //        //dummy data start
@@ -68,6 +69,9 @@ public class LIstActivity extends AppCompatActivity {
 
         String[] allCategory = getResources().getStringArray(R.array.spinner_category);
         categoryCounter = 0;
+        myCategory.clear();
+        myTodoList.clear();
+        myKey.clear();
         String selectedCategory = getIntent().getExtras().get("categoryName").toString();
         String[] selCategoryList;
         if(selectedCategory.equals("All")) {
@@ -95,6 +99,7 @@ public class LIstActivity extends AppCompatActivity {
                                     todo_list_model myTodoModel = new todo_list_model(name, startDate, startTime, endDate, endTime, description);
                                     myTodoList.add(myTodoModel);
                                     myCategory.add(category);
+                                    myKey.add(document.getId());
                                 }
                                 if(categoryCounter == selCategoryList.length) {
                                     setScreen();
@@ -109,7 +114,7 @@ public class LIstActivity extends AppCompatActivity {
     }
 
     private void setScreen() {
-        TodoAdapter adapter = new TodoAdapter(LIstActivity.this, myTodoList, myCategory);
+        TodoAdapter adapter = new TodoAdapter(myKey, myTodoList, myCategory);
         recyclerView.setAdapter(adapter);
     }
 }
