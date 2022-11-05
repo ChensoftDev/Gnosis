@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:entries="@array/spinner_category"/>
+            android:entries="@array/spinner_category2"/>
 
         <TextView
             android:layout_width="wrap_content"
