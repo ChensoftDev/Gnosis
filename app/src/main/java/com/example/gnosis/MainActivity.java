@@ -1,5 +1,6 @@
 package com.example.gnosis;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,27 +10,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Toast;
 
 import com.example.gnosis.reclerview.CategoryAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     // Using ArrayList to store images data
-    //ArrayList categoryImg = null;
     ArrayList categoryImg = new ArrayList<>(Arrays.asList(R.drawable.checklist, R.drawable.lightbulb,
-            R.drawable.idea, R.drawable.mindful,
-            R.drawable.schedule));
+            R.drawable.idea, R.drawable.mindful, R.drawable.schedule));
     ArrayList categoryName = new ArrayList<>(Arrays.asList("All"));
-    ArrayList categoryDesc = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
-            "C-Language", "HTML 5", "CSS"));
-    // test comment
+    HashMap<String, String> categoryDesc = new HashMap<>();
 
-    int DBLoadCounter;
+    int DBLoadCounter, DBLoadChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
+
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
+                intent.putExtra("key", "new");
+                startActivity(intent);
+            }
+        });
+        CheckList();
+
+    }
+
+    private void setScreen() {
         // Getting reference of recyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewMain);
 
@@ -54,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Sending reference and data to Adapter
         CategoryAdapter adapter = new CategoryAdapter(MainActivity.this, categoryImg, categoryName, categoryDesc);
 
-        // Chul MIn : Call list activity when category button clicked
+        // Call list activity when category button clicked
         adapter.setItemClickListener(new CategoryAdapter.ItemClickListener() {
             @Override
             public void itemListener(String categoryName) {
@@ -73,24 +90,35 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting Adapter to RecyclerView
         recyclerView.setAdapter(adapter);
-
-        addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
-                intent.putExtra("key", "new");
-                startActivity(intent);
-            }
-        });
-        CheckList();
     }
 
     private void CheckList() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DBLoadCounter = 0;
+        DBLoadChecker = 0;
+        categoryDesc.put("Timetable","");
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             if(!category.equals("Timetable")) {
-
+                db.collection(category)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                categoryDesc.put(category, String.valueOf(queryDocumentSnapshots.size()));
+                                DBLoadChecker++;
+                                DBLoadCounter += queryDocumentSnapshots.size();
+                                if(DBLoadChecker == 3) {
+                                    setScreen();
+                                    categoryDesc.put("All", String.valueOf(DBLoadCounter));
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(MainActivity.this, "Loading error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         }
 

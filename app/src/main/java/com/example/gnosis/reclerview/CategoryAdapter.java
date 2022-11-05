@@ -13,14 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gnosis.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    ArrayList categoryImg, categoryName,catDesc;
+    ArrayList categoryImg, categoryName;
+    HashMap<String, String> catDesc;
     Context context;
 
     // Constructor for initialization
-    public CategoryAdapter(Context context, ArrayList categoryImg, ArrayList categoryName,ArrayList catDesc) {
+    public CategoryAdapter(Context context, ArrayList categoryImg, ArrayList categoryName, HashMap<String, String> catDesc) {
         this.context = context;
         this.categoryImg = categoryImg;
         this.categoryName = categoryName;
@@ -46,8 +48,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         // TypeCast Object to int type
         int res = (int) categoryImg.get(position);
         holder.images.setImageResource(res);
-        holder.head.setText((String) categoryName.get(position));
-        holder.Desc.setText((String) catDesc.get(position));
+        holder.head.setText((String) categoryName.get(position));        ;
+        holder.Desc.setText(catDesc.get(categoryName.get(position)));
     }
 
     @Override
