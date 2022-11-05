@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,12 +35,30 @@ public class LIstActivity extends AppCompatActivity {
     ArrayList myCategory;
     int categoryCounter;
 
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        pd = new ProgressDialog(LIstActivity.this);
 
+        // Set progress dialog style spinner
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        // Set the progress dialog title and message
+        pd.setTitle("Please wait");
+        pd.setMessage("Loading.........");
+        pd.setCancelable(false);
+
+        // Set the progress dialog background color
+        //pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFD4D9D0")));
+
+        pd.setIndeterminate(false);
+
+        // Finally, show the progress dialog
+        pd.show();
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewTodoList);
@@ -83,26 +104,54 @@ public class LIstActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()) {
                                 categoryCounter++;
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Toast.makeText(LIstActivity.this, "Loading Succeed",
-                                            Toast.LENGTH_LONG).show();
-                                    String name = document.getData().get("name").toString();
-                                    String startDate = document.getData().get("startDate").toString();
-                                    String startTime = document.getData().get("startTime").toString();
-                                    String endDate = document.getData().get("endDate").toString();
-                                    String endTime = document.getData().get("endTime").toString();
-                                    String description = document.getData().get("description").toString();
-                                    todo_list_model myTodoModel = new todo_list_model(name, startDate, startTime, endDate, endTime, description);
-                                    myTodoList.add(myTodoModel);
-                                    myCategory.add(category);
-                                }
+
+
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                        String name = document.getData().get("name").toString();
+                                        String startDate = document.getData().get("startDate").toString();
+                                        String startTime = document.getData().get("startTime").toString();
+                                        String endDate = document.getData().get("endDate").toString();
+                                        String endTime = document.getData().get("endTime").toString();
+                                        String description = document.getData().get("description").toString();
+                                        todo_list_model myTodoModel = new todo_list_model(name, startDate, startTime, endDate, endTime, description);
+                                        myTodoList.add(myTodoModel);
+                                        myCategory.add(category);
+
+                                    }
+
+
+
+
+
+
+
+
+
+
                                 if(categoryCounter == selCategoryList.length) {
                                     setScreen();
+//                                    if (categoryCounter == 1) {
+//                                        new AlertDialog.Builder(LIstActivity.this)
+//                                                .setTitle("Message")
+//                                                .setMessage("Sorry no information to display")
+//                                                .setCancelable(false)
+//                                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(DialogInterface dialog, int which) {
+//                                                        finish();
+//                                                    }
+//                                                }).show();
+//
+//                                    }
                                 }
+
                             } else {
                                 Toast.makeText(LIstActivity.this, "Loading Failed",
                                         Toast.LENGTH_SHORT).show();
                             }
+
+                            pd.hide();
                         }
                     });
         }
