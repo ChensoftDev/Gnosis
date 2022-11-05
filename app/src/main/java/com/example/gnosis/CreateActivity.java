@@ -34,7 +34,7 @@ public class CreateActivity extends AppCompatActivity {
     Spinner spinNewTodoEndMidday;
     EditText etNewTodoDescription;
     Button btnNewTodoSubmit;
-    Button btnNewTodoCancel;
+    //Button btnNewTodoCancel;
 
 
     @Override
@@ -54,7 +54,7 @@ public class CreateActivity extends AppCompatActivity {
         spinNewTodoEndMidday = findViewById(R.id.spinNewTodoStartMidday);
         etNewTodoDescription = findViewById(R.id.etNewTodoDescription);
         btnNewTodoSubmit = findViewById(R.id.btnNewTodoSubmit);
-        btnNewTodoCancel = findViewById(R.id.btnNewTodoCancel);
+        //btnNewTodoCancel = findViewById(R.id.btnNewTodoCancel);
 
         addEventListeners();
         initInput();
@@ -96,12 +96,12 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        btnNewTodoCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        btnNewTodoCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
     }
 
     private void setOnDatabase() {
