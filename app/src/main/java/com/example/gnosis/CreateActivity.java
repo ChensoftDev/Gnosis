@@ -233,6 +233,23 @@ public class CreateActivity extends AppCompatActivity {
         String description = etNewTodoDescription.getText().toString();
         String category = spinNewTodoCategory.getSelectedItem().toString();
 
+        if(name.isEmpty()) {
+            etNewTodoName.setError("required");
+            return;
+        }
+        if(startDate.isEmpty()) {
+            etNewTodoStartDate.setError("required");
+            return;
+        }
+        if(EndDate.isEmpty()) {
+            etNewTodoEndDate.setError("required");
+            return;
+        }
+        if(description.isEmpty()) {
+            etNewTodoDescription.setError("required");
+            return;
+        }
+
         // generate new todo item
         todo_list_model myTodoItem = new todo_list_model(name, startDate, startTime,
                 EndDate, endTime, description);
