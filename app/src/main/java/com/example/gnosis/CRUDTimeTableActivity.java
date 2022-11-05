@@ -33,6 +33,7 @@ public class CRUDTimeTableActivity extends AppCompatActivity {
     private EditText eClassroom;
     private Spinner spinnerClassDay;
     private Button btnUpSert;
+    private Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,10 @@ public class CRUDTimeTableActivity extends AppCompatActivity {
         eClassroom = findViewById(R.id.edit_text_classroom);
         spinnerClassDay = findViewById(R.id.spinner_class_day);
         btnUpSert = findViewById(R.id.btn_upsert);
+        btnCancel = findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(v -> {
+            finish();
+        });
         btnUpSert.setOnClickListener(v -> {
             upSert();
         });
