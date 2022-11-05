@@ -55,6 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return categoryName.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView images;
         TextView head;
@@ -81,7 +82,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public interface ItemClickListener {
         void itemListener(String categoryName);
     }
+
     ItemClickListener itemClickListener;
+
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }

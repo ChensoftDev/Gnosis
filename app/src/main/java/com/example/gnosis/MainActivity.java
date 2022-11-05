@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CreateActivity.class));
+                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
+                intent.putExtra("key", "new");
+                startActivity(intent);
             }
         });
 
