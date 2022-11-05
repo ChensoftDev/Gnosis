@@ -105,6 +105,7 @@ public class TimetableActivity extends AppCompatActivity implements TimetableAct
     public void onClick(TimetableActivityModel item) {
         Intent intent = new Intent(this, CRUDTimeTableActivity.class);
         intent.putExtra("param", item);
+
         startActivity(intent);
     }
 }

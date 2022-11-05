@@ -254,8 +254,10 @@ public class CreateActivity extends AppCompatActivity {
         todo_list_model myTodoItem = new todo_list_model(name, startDate, startTime,
                 EndDate, endTime, description);
 
+
+
         if(getIntent().getExtras().get("key").equals("new")){
-            // Write down data in Database
+            // Write down new data in Database
             db.collection(category).add(myTodoItem)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
@@ -273,6 +275,7 @@ public class CreateActivity extends AppCompatActivity {
                         }
                     });
         } else {
+            // update data in Database
             db.collection(category).document(getIntent().getExtras().get("key").toString())
                     .set(myTodoItem)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {

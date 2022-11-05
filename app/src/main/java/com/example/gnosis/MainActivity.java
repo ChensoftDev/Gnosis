@@ -12,6 +12,7 @@ import android.widget.Adapter;
 
 import com.example.gnosis.reclerview.CategoryAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
             "C-Language", "HTML 5", "CSS"));
     // test comment
 
+    int DBLoadCounter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             categoryName.add(category);
         }
-
 
 
         // Getting reference of recyclerView
@@ -80,7 +82,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        CheckList();
+    }
 
+    private void CheckList() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DBLoadCounter = 0;
+        for(String category : getResources().getStringArray(R.array.spinner_category)) {
+            if(!category.equals("Timetable")) {
+
+            }
+        }
 
     }
 }

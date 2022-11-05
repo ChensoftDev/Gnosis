@@ -1,6 +1,8 @@
 package com.example.gnosis;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +34,7 @@ public class LIstActivity extends AppCompatActivity {
     List<todo_list_model> myTodoList;
     ArrayList<String> myCategory, myKey;
     int categoryCounter;
+    TodoAdapter adapter;
 
     ProgressDialog pd;
 
@@ -59,8 +62,6 @@ public class LIstActivity extends AppCompatActivity {
         pd.show();
 
 
-
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewTodoList);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -70,15 +71,6 @@ public class LIstActivity extends AppCompatActivity {
         myCategory = new ArrayList<>();
         myKey = new ArrayList<>();
         categoryCounter = 0;
-
-//        //dummy data start
-//        ArrayList todoName = new ArrayList<>(Arrays.asList("All", "Assignment", "To Do", "Mindful", "Timetable",
-//                "C-Language", "HTML 5", "CSS"));
-//        ArrayList todoStart = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
-//                "C-Language", "HTML 5", "CSS"));
-//        ArrayList todoCate = new ArrayList<>(Arrays.asList("Todo", "Todo", "C#", "Mindful", "Todo",
-//                "Assignment", "Assignment", "Mindful"));
-        //dummy data end
 
         loadTodoList();
 
@@ -138,7 +130,24 @@ public class LIstActivity extends AppCompatActivity {
     }
 
     private void setScreen() {
-        TodoAdapter adapter = new TodoAdapter(myKey, myTodoList, myCategory);
+        adapter = new TodoAdapter(myKey, myTodoList, myCategory);
+        adapter.setTodoClickListener(new TodoAdapter.TodoClickListener() {
+            @Override
+            public void itemClickListener(String itemId, String category) {
+                Intent intent = new Intent(LIstActivity.this, CreateActivity.class);
+                intent.putExtra("key", itemId);
+                intent.putExtra("category", category);
+                startActivityForResult(intent, 100);
+            }
+        });
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100) {
+            loadTodoList();
+        }
     }
 }
