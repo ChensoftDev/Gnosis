@@ -1,6 +1,7 @@
 package com.example.gnosis;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,9 @@ public class LIstActivity extends AppCompatActivity {
 
     List<todo_list_model> myTodoList;
     ArrayList myCategory;
+    ArrayList<String> myKeys = new ArrayList<>();
     int categoryCounter;
+    TodoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +54,7 @@ public class LIstActivity extends AppCompatActivity {
         myCategory = new ArrayList();
         categoryCounter = 0;
 
-//        //dummy data start
-//        ArrayList todoName = new ArrayList<>(Arrays.asList("All", "Assignment", "To Do", "Mindful", "Timetable",
-//                "C-Language", "HTML 5", "CSS"));
-//        ArrayList todoStart = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
-//                "C-Language", "HTML 5", "CSS"));
-//        ArrayList todoCate = new ArrayList<>(Arrays.asList("Todo", "Todo", "C#", "Mindful", "Todo",
-//                "Assignment", "Assignment", "Mindful"));
-        //dummy data end
-
         loadTodoList();
-
-
     }
 
     private void loadTodoList() {
@@ -75,6 +69,9 @@ public class LIstActivity extends AppCompatActivity {
         } else {
             selCategoryList = new String[]{selectedCategory};
         }
+        myKeys.clear();
+        myTodoList.clear();
+        myCategory.clear();
         for(String category : selCategoryList) {
             db.collection(category)
                     .get()
@@ -83,6 +80,7 @@ public class LIstActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()) {
                                 categoryCounter++;
+
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Toast.makeText(LIstActivity.this, "Loading Succeed",
                                             Toast.LENGTH_LONG).show();
@@ -95,6 +93,7 @@ public class LIstActivity extends AppCompatActivity {
                                     todo_list_model myTodoModel = new todo_list_model(name, startDate, startTime, endDate, endTime, description);
                                     myTodoList.add(myTodoModel);
                                     myCategory.add(category);
+                                    myKeys.add(document.getId());
                                 }
                                 if(categoryCounter == selCategoryList.length) {
                                     setScreen();
@@ -109,7 +108,27 @@ public class LIstActivity extends AppCompatActivity {
     }
 
     private void setScreen() {
-        TodoAdapter adapter = new TodoAdapter(LIstActivity.this, myTodoList, myCategory);
+        adapter = new TodoAdapter(myKeys, myTodoList, myCategory);
+        adapter.setTodoClickListener(new TodoAdapter.TodoClickListener() {
+            @Override
+            public void itemClickListener(String itemId, String category) {
+                Intent intent = new Intent(LIstActivity.this, CreateActivity.class);
+                intent.putExtra("key", itemId);
+                intent.putExtra("category", category);
+                startActivityForResult(intent,100);
+            }
+        });
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100) {
+            recyclerView.swapAdapter(adapter, true);
+            loadTodoList();
+            setScreen();
+
+        }
     }
 }
