@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,10 +33,30 @@ public class LIstActivity extends AppCompatActivity {
     ArrayList<String> myCategory, myKey;
     int categoryCounter;
 
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        pd = new ProgressDialog(LIstActivity.this);
+
+        // Set progress dialog style spinner
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        // Set the progress dialog title and message
+        pd.setTitle("Please wait");
+        pd.setMessage("Loading.........");
+        pd.setCancelable(false);
+
+        // Set the progress dialog background color
+        //pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFD4D9D0")));
+
+        pd.setIndeterminate(false);
+
+        // Finally, show the progress dialog
+        pd.show();
 
 
 
@@ -88,8 +109,8 @@ public class LIstActivity extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 categoryCounter++;
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Toast.makeText(LIstActivity.this, "Loading Succeed",
-                                            Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(LIstActivity.this, "Loading Succeed",
+                                            //Toast.LENGTH_LONG).show();
                                     String name = document.getData().get("name").toString();
                                     String startDate = document.getData().get("startDate").toString();
                                     String startTime = document.getData().get("startTime").toString();
@@ -101,6 +122,9 @@ public class LIstActivity extends AppCompatActivity {
                                     myCategory.add(category);
                                     myKey.add(document.getId());
                                 }
+
+                                pd.hide();
+
                                 if(categoryCounter == selCategoryList.length) {
                                     setScreen();
                                 }
