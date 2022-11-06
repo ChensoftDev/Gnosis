@@ -1,6 +1,7 @@
 package com.example.gnosis;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -24,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private int MAIN_PAGE = 100;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -80,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
                 finishAffinity();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MAIN_PAGE);
             }
             @Override
             public void onAuthenticationFailed() {
@@ -177,5 +180,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        mAuth.signOut();
     }
 }
