@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -94,9 +97,11 @@ public class LIstActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()) {
                                 categoryCounter++;
+
+
+
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //Toast.makeText(LIstActivity.this, "Loading Succeed",
-                                            //Toast.LENGTH_LONG).show();
+
                                     String name = document.getData().get("name").toString();
                                     String startDate = document.getData().get("startDate").toString();
                                     String startTime = document.getData().get("startTime").toString();
@@ -110,6 +115,7 @@ public class LIstActivity extends AppCompatActivity {
                                 }
 
                                 pd.hide();
+
 
                                 if(categoryCounter == selCategoryList.length) {
                                     setScreen();
@@ -135,6 +141,21 @@ public class LIstActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        if(myTodoList.size() == 0) {
+            new AlertDialog.Builder(LIstActivity.this)
+                    .setTitle("Message")
+                    .setMessage("Sorry, no information to display")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Whatever...
+                            finish();
+                        }
+                    }).show();
+
+        }
     }
 
     @Override
