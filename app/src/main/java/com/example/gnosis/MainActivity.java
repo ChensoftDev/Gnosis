@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gnosis.reclerview.CategoryAdapter;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, String> categoryDesc = new HashMap<>();
 
 
+
     int DBLoadCounter, DBLoadChecker;
 
     @Override
@@ -41,11 +43,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FloatingActionButton addbtn = findViewById(R.id.fab_create);
+        Button btnLogout = findViewById(R.id.btn_main_logout);
 
         // add categoryname in list
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             categoryName.add(category);
         }
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {

@@ -3,24 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Studies/Unitec/2022_S2/ISCG7424 Mobile Software Development/Projects/Gnosis/app/src/main/res/layout/activity_create.xml" value="0.23278985507246377" />
+        <entry key="..\:/Studies/Unitec/2022_S2/ISCG7424 Mobile Software Development/Projects/Gnosis/app/src/main/res/layout/activity_main.xml" value="0.3942614240170032" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/drawable/bg_full_rounded_white_bg.xml" value="0.23" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/drawable/bg_rounded_bg.xml" value="0.1715" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/drawable/bg_timetable_row.xml" value="0.253" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/drawable/bg_timetable_row_2.xml" value="0.253" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/drawable/check_list_logo.xml" value="0.1715" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_bioactivity.xml" value="0.36" />
-        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_create.xml" value="0.22745098039215686" />
+        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_create.xml" value="0.268" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_create2.xml" value="0.17654508611955422" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_crudtime_table.xml" value="0.2" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_detail.xml" value="0.3" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_list.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_login.xml" value="0.268" />
-        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_main.xml" value="0.3" />
+        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_main.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_register.xml" value="0.3432971014492754" />
-        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_task_detail.xml" value="0.27309782608695654" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/activity_timetable.xml" value="0.2884963768115942" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/category_item.xml" value="0.36" />
-        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/item_list.xml" value="0.20594262295081966" />
+        <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/item_list.xml" value="0.4" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/timetable_activity_list_item.xml" value="0.2884963768115942" />
         <entry key="..\:/Users/ADMIN/Desktop/Unitec S2 Study/Assignment_group/Gnosis/app/src/main/res/layout/timetable_list_item.xml" value="0.3088768115942029" />
       </map>

@@ -1,9 +1,11 @@
 package com.example.gnosis;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +43,7 @@ public class CreateActivity extends AppCompatActivity {
     Spinner spinNewTodoEndMidday;
     EditText etNewTodoDescription;
     Button btnNewTodoSubmit;
-    //Button btnNewTodoCancel;
+    Button btnNewTodoDelete;
 
     Calendar calendar = Calendar.getInstance();
     int categoryIndex;
@@ -65,7 +67,7 @@ public class CreateActivity extends AppCompatActivity {
         spinNewTodoEndMidday = findViewById(R.id.spinNewTodoStartMidday);
         etNewTodoDescription = findViewById(R.id.etNewTodoDescription);
         btnNewTodoSubmit = findViewById(R.id.btnNewTodoSubmit);
-        //btnNewTodoCancel = findViewById(R.id.btnNewTodoCancel);
+        btnNewTodoDelete = findViewById(R.id.btnNewTodoDelete);
 
         etNewTodoStartDate.setOnClickListener(v -> {
             setDateOnEditText(etNewTodoStartDate);
@@ -76,6 +78,7 @@ public class CreateActivity extends AppCompatActivity {
             initInput();
         } else {
             loadDetail();
+            btnNewTodoDelete.setVisibility(View.VISIBLE);
         }
     }
 
@@ -219,6 +222,44 @@ public class CreateActivity extends AppCompatActivity {
                 if(isInputValid()) {
                     setOnDatabase();
                 }
+            }
+        });
+
+        btnNewTodoDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                AlertDialog.Builder alertDBuilder = new AlertDialog.Builder(CreateActivity.this);
+                alertDBuilder.setTitle("Do you want to delete?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                db.collection(getIntent().getExtras().get("key").toString())
+                                        .document(getIntent().getExtras().get("category").toString())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(CreateActivity.this, "Success to delete", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(CreateActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDBuilder.create();
+                alertDialog.show();
             }
         });
 

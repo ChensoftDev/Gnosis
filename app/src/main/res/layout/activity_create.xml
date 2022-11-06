@@ -199,18 +199,39 @@
         </androidx.cardview.widget.CardView>
 
 
-        <Button
-            android:id="@+id/btnNewTodoSubmit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="15dp"
-            android:text="SAVE"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/light_blue" />
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnNewTodoSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="SAVE"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/light_blue" />
+            <Button
+                android:id="@+id/btnNewTodoDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="DELETE"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/light_blue"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </ScrollView>
