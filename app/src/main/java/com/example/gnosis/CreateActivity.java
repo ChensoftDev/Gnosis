@@ -73,6 +73,10 @@ public class CreateActivity extends AppCompatActivity {
             setDateOnEditText(etNewTodoStartDate);
         });
 
+        etNewTodoStartDate.setOnClickListener(v -> {
+            setDateOnEditText(etNewTodoStartDate);
+        });
+
         addEventListeners();
         if(getIntent().getExtras().get("key").equals("new")) {
             initInput();

@@ -50,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
             categoryName.add(category);
         }
 
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {
