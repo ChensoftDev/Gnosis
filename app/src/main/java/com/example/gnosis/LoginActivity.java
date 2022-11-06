@@ -6,6 +6,7 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -129,12 +130,34 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUserAccount(String email,String password) {
 
+        ProgressDialog pd;
+
+        pd = new ProgressDialog(LoginActivity.this);
+
+        // Set progress dialog style spinner
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        // Set the progress dialog title and message
+        pd.setTitle("Please wait");
+        pd.setMessage("Loading.........");
+        pd.setCancelable(false);
+
+        // Set the progress dialog background color
+        //pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFD4D9D0")));
+
+        pd.setIndeterminate(false);
+
+        // Finally, show the progress dialog
+        pd.show();
+
         if (email.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
+            pd.hide();
             return;
         }
         if (password.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
+            pd.hide();
             return;
         }
 
@@ -146,8 +169,10 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            pd.hide();
                         }
                         else {
+                            pd.hide();
                             Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                         }
                     }

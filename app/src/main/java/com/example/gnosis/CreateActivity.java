@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gnosis.model.todo_list_model;
@@ -66,6 +67,10 @@ public class CreateActivity extends AppCompatActivity {
         btnNewTodoSubmit = findViewById(R.id.btnNewTodoSubmit);
         //btnNewTodoCancel = findViewById(R.id.btnNewTodoCancel);
 
+        etNewTodoStartDate.setOnClickListener(v -> {
+            setDateOnEditText(etNewTodoStartDate);
+        });
+
         addEventListeners();
         if(getIntent().getExtras().get("key").equals("new")) {
             initInput();
@@ -89,7 +94,12 @@ public class CreateActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                         etNewTodoName.setText(documentSnapshot.get("name").toString());
+
+                        TextView title = findViewById(R.id.tv_title);
+                        title.setText(etNewTodoName.getText().toString());
+
                         spinNewTodoCategory.setSelection(categoryIndex);
                         etNewTodoStartDate.setText(documentSnapshot.get("startDate").toString());
                         String[] StartTimeFull = documentSnapshot.get("startTime").toString().split(" ");
@@ -146,6 +156,8 @@ public class CreateActivity extends AppCompatActivity {
 
         etNewTodoStartDate.setText(txtInitStartDate);
         etNewTodoEndDate.setText(txtInitEndDate);
+
+
 
         // set initial value of time 9:00 AM ~ 10:00 AM
         spinNewTodoStartHour.setSelection(8);
@@ -216,6 +228,55 @@ public class CreateActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+    }
+
+    private void setDateOnEditText(EditText et) {
+        // on below line we are getting
+        // the instance of our calendar.
+        final Calendar c = Calendar.getInstance();
+
+        // on below line we are getting
+        // our day, month and year.
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        // on below line we are creating a variable for date picker dialog.
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                // on below line we are passing context.
+                CreateActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // on below line we are setting date to our edit text.
+
+                        String Month,Day;
+
+                        if((monthOfYear+1) < 10) {
+                            Month = "0" + (monthOfYear + 1);
+                        } else {
+                            Month =  "" + (monthOfYear + 1);
+                        }
+
+                        if(dayOfMonth < 10) {
+                            Day = "0" + dayOfMonth;
+                        } else {
+                            Day = "" + dayOfMonth;
+                        }
+
+                        et.setText(Day + "-" + Month + "-" + year);
+
+                    }
+                },
+                // on below line we are passing year,
+                // month and day for selected date in our date picker.
+                year, month, day);
+        // at last we are calling show to
+        // display our date picker dialog.
+        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.setCanceledOnTouchOutside(false);
+        datePickerDialog.show();
     }
 
     private void setOnDatabase() {
