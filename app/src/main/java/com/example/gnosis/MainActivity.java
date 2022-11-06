@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList categoryName = new ArrayList<>(Arrays.asList("All"));
     HashMap<String, String> categoryDesc = new HashMap<>();
 
+
     int DBLoadCounter, DBLoadChecker;
 
     @Override
@@ -44,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             categoryName.add(category);
         }
-
-
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {
