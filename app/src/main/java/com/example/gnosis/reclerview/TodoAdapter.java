@@ -83,7 +83,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     if (todoClickListener != null) {
-                        todoClickListener.itemClickListener(key.getText().toString(), category.getText().toString());
+                        todoClickListener.itemClickListener(key.getText().toString(), category.getText().toString(),head.getText().toString());
                     }
                 }
             });
@@ -91,7 +91,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     }
 
     public  interface TodoClickListener {
-        void itemClickListener(String itemId, String category);
+        void itemClickListener(String itemId, String category,String head);
     }
 
     TodoClickListener todoClickListener = null;
