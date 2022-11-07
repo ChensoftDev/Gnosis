@@ -92,7 +92,7 @@ public class LIstActivity extends AppCompatActivity {
             selCategoryList = new String[]{selectedCategory};
         }
         for(String category : selCategoryList) {
-            db.collection(auth.getCurrentUser().getUid())
+            db.collection("users")
                     .document(auth.getCurrentUser().getUid())
                     .collection(category)
                     .get()

@@ -126,7 +126,7 @@ public class CreateActivity extends AppCompatActivity {
         }
 
         String myKey = getIntent().getExtras().get("key").toString();
-        db.collection(auth.getCurrentUser().getUid())
+        db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection(category)
                 .document(myKey)
@@ -272,7 +272,7 @@ public class CreateActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db.collection(auth.getCurrentUser().getUid())
+                                db.collection("users")
                                         .document(auth.getCurrentUser().getUid())
                                         .collection(getIntent().getExtras().get("category").toString())
                                         .document(getIntent().getExtras().get("key").toString())
@@ -392,7 +392,7 @@ public class CreateActivity extends AppCompatActivity {
 
         if(getIntent().getExtras().get("key").equals("new")){
             // Write down new data in Database
-            db.collection(auth.getCurrentUser().getUid())
+            db.collection("users")
                     .document(auth.getCurrentUser().getUid())
                     .collection(category).add(myTodoItem)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -412,7 +412,7 @@ public class CreateActivity extends AppCompatActivity {
                     });
         } else {
             // update data in Database
-            db.collection(auth.getCurrentUser().getUid())
+            db.collection("users")
                     .document(auth.getCurrentUser().getUid())
                     .collection(category).document(getIntent().getExtras().get("key").toString())
                     .set(myTodoItem)

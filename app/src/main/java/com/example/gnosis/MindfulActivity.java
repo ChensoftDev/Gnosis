@@ -57,7 +57,7 @@ public class MindfulActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db.collection(auth.getCurrentUser().getUid())
+                                db.collection("users")
                                         .document(auth.getCurrentUser().getUid())
                                         .collection(getIntent().getExtras().get("key").toString())
                                         .document(getIntent().getExtras().get("category").toString())
@@ -111,7 +111,7 @@ public class MindfulActivity extends AppCompatActivity {
         String category = getIntent().getExtras().get("category").toString();
 
         String myKey = getIntent().getExtras().get("key").toString();
-        db.collection(auth.getCurrentUser().getUid())
+        db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection(category)
                 .document(myKey)

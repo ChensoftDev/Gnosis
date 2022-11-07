@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         categoryDesc.put("Timetable","");
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             if(!category.equals("Timetable")) {
-                db.collection(auth.getCurrentUser().getUid())
+                db.collection("users")
                         .document(auth.getCurrentUser().getUid())
                         .collection(category)
                         .get()
