@@ -133,7 +133,18 @@ public class LIstActivity extends AppCompatActivity {
         adapter = new TodoAdapter(myKey, myTodoList, myCategory);
         adapter.setTodoClickListener(new TodoAdapter.TodoClickListener() {
             @Override
-            public void itemClickListener(String itemId, String category) {
+            public void itemClickListener(String itemId, String category,String head) {
+
+                if(category.equals("Mindful")) {
+                    Intent intent = new Intent(LIstActivity.this, MindfulActivity.class);
+                    intent.putExtra("key", itemId);
+                    intent.putExtra("category", category);
+                    intent.putExtra("head", head);
+                    startActivity(intent);
+                    return;
+                }
+
+
                 Intent intent = new Intent(LIstActivity.this, CreateActivity.class);
                 intent.putExtra("key", itemId);
                 intent.putExtra("category", category);

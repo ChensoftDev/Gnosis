@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -68,6 +69,33 @@ public class CreateActivity extends AppCompatActivity {
         etNewTodoDescription = findViewById(R.id.etNewTodoDescription);
         btnNewTodoSubmit = findViewById(R.id.btnNewTodoSubmit);
         btnNewTodoDelete = findViewById(R.id.btnNewTodoDelete);
+
+        spinNewTodoCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(parent.getItemAtPosition(position).toString().equals("Mindful")) {
+                    EditText editText = new EditText(CreateActivity.this);
+                    AlertDialog dialog = new AlertDialog.Builder(CreateActivity.this)
+                            .setTitle("Youtube Media")
+                            .setMessage("Enter Youtube Link")
+                            .setView(editText)
+                            .setPositiveButton("OK", (dialogInterface, i) -> {
+                                String editTextInput = editText.getText().toString();
+                                etNewTodoDescription.setText(editTextInput);
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create();
+                    dialog.show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         etNewTodoStartDate.setOnClickListener(v -> {
             setDateOnEditText(etNewTodoStartDate);
