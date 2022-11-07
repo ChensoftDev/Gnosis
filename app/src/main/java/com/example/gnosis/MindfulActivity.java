@@ -59,8 +59,8 @@ public class MindfulActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 db.collection("users")
                                         .document(auth.getCurrentUser().getUid())
-                                        .collection(getIntent().getExtras().get("key").toString())
-                                        .document(getIntent().getExtras().get("category").toString())
+                                        .collection(getIntent().getExtras().get("category").toString())
+                                        .document(getIntent().getExtras().get("key").toString())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
