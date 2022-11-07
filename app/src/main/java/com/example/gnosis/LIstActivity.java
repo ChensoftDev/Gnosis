@@ -18,6 +18,7 @@ import com.example.gnosis.model.todo_list_model;
 import com.example.gnosis.reclerview.TodoAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +34,7 @@ public class LIstActivity extends AppCompatActivity {
     int categoryCounter;
     TodoAdapter adapter;
 
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     ProgressDialog pd;
 
     @Override
@@ -90,7 +92,9 @@ public class LIstActivity extends AppCompatActivity {
             selCategoryList = new String[]{selectedCategory};
         }
         for(String category : selCategoryList) {
-            db.collection(category)
+            db.collection(auth.getCurrentUser().getUid())
+                    .document(auth.getCurrentUser().getUid())
+                    .collection(category)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

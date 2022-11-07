@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -26,6 +28,8 @@ import java.util.regex.Pattern;
 public class MindfulActivity extends AppCompatActivity {
 
     YouTubePlayerView yt_player;
+
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,9 @@ public class MindfulActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db.collection(getIntent().getExtras().get("key").toString())
+                                db.collection(auth.getCurrentUser().getUid())
+                                        .document(auth.getCurrentUser().getUid())
+                                        .collection(getIntent().getExtras().get("key").toString())
                                         .document(getIntent().getExtras().get("category").toString())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -105,7 +111,9 @@ public class MindfulActivity extends AppCompatActivity {
         String category = getIntent().getExtras().get("category").toString();
 
         String myKey = getIntent().getExtras().get("key").toString();
-        db.collection(category)
+        db.collection(auth.getCurrentUser().getUid())
+                .document(auth.getCurrentUser().getUid())
+                .collection(category)
                 .document(myKey)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

@@ -48,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         // TypeCast Object to int type
         int res = (int) categoryImg.get(position);
         holder.images.setImageResource(res);
-        holder.head.setText((String) categoryName.get(position));        ;
+        holder.head.setText((String) categoryName.get(position));
         holder.Desc.setText(catDesc.get(categoryName.get(position)));
     }
 

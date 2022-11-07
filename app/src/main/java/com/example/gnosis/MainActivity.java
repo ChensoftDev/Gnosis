@@ -20,6 +20,7 @@ import com.example.gnosis.reclerview.CategoryAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.idea, R.drawable.mindful, R.drawable.schedule));
     ArrayList categoryName = new ArrayList<>(Arrays.asList("All"));
     HashMap<String, String> categoryDesc = new HashMap<>();
+
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
 
@@ -114,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
         categoryDesc.put("Timetable","");
         for(String category : getResources().getStringArray(R.array.spinner_category)) {
             if(!category.equals("Timetable")) {
-                db.collection(category)
+                db.collection(auth.getCurrentUser().getUid())
+                        .document(auth.getCurrentUser().getUid())
+                        .collection(category)
                         .get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override

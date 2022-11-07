@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.gnosis.model.todo_list_model;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,6 +49,8 @@ public class CreateActivity extends AppCompatActivity {
 
     Calendar calendar = Calendar.getInstance();
     int categoryIndex;
+
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
 
@@ -123,7 +126,9 @@ public class CreateActivity extends AppCompatActivity {
         }
 
         String myKey = getIntent().getExtras().get("key").toString();
-        db.collection(category)
+        db.collection(auth.getCurrentUser().getUid())
+                .document(auth.getCurrentUser().getUid())
+                .collection(category)
                 .document(myKey)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -267,7 +272,9 @@ public class CreateActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db.collection(getIntent().getExtras().get("category").toString())
+                                db.collection(auth.getCurrentUser().getUid())
+                                        .document(auth.getCurrentUser().getUid())
+                                        .collection(getIntent().getExtras().get("category").toString())
                                         .document(getIntent().getExtras().get("key").toString())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -294,13 +301,6 @@ public class CreateActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-
-//        btnNewTodoCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
     }
 
     private void setDateOnEditText(EditText et) {
@@ -392,7 +392,9 @@ public class CreateActivity extends AppCompatActivity {
 
         if(getIntent().getExtras().get("key").equals("new")){
             // Write down new data in Database
-            db.collection(category).add(myTodoItem)
+            db.collection(auth.getCurrentUser().getUid())
+                    .document(auth.getCurrentUser().getUid())
+                    .collection(category).add(myTodoItem)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -410,7 +412,9 @@ public class CreateActivity extends AppCompatActivity {
                     });
         } else {
             // update data in Database
-            db.collection(category).document(getIntent().getExtras().get("key").toString())
+            db.collection(auth.getCurrentUser().getUid())
+                    .document(auth.getCurrentUser().getUid())
+                    .collection(category).document(getIntent().getExtras().get("key").toString())
                     .set(myTodoItem)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

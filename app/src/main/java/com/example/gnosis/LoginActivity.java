@@ -26,7 +26,7 @@ import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private int MAIN_PAGE = 100;
+    private final int MAIN_PAGE = 100;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;

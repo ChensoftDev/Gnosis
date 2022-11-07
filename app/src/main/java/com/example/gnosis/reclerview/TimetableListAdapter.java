@@ -14,7 +14,7 @@ import com.example.gnosis.model.TimetableListActivityModel;
 import com.example.gnosis.utils.TimetableListItemDiffUtils;
 
 public class TimetableListAdapter extends ListAdapter<TimetableListActivityModel, TimetableListAdapter.ViewHolder> {
-    private TimetableActivityListAdapter.Listener listener;
+    private final TimetableActivityListAdapter.Listener listener;
     public TimetableListAdapter(TimetableActivityListAdapter.Listener listener) {
         super(new TimetableListItemDiffUtils());
         this.listener = listener;
