@@ -267,8 +267,8 @@ public class CreateActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db.collection(getIntent().getExtras().get("key").toString())
-                                        .document(getIntent().getExtras().get("category").toString())
+                                db.collection(getIntent().getExtras().get("category").toString())
+                                        .document(getIntent().getExtras().get("key").toString())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

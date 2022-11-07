@@ -1,6 +1,7 @@
 package com.example.gnosis;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CreateActivity.class);
                 intent.putExtra("key", "new");
-                startActivity(intent);
+                startActivityForResult(intent, 100);
             }
         });
         CheckList();
@@ -91,14 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if(categoryName.equals("Timetable")) {
                     Intent intent = new Intent(MainActivity.this, TimetableActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 100);
                     return;
                 }
 
 
                 Intent intent = new Intent(MainActivity.this, LIstActivity.class);
                 intent.putExtra("categoryName", categoryName);
-                startActivity(intent);
+                startActivityForResult(intent, 100);
             }
         });
 
@@ -136,5 +137,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        CheckList();
     }
 }
